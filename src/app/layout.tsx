@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} relative min-h-screen`}>
+        <div className="relative z-10 min-h-screen ">{children}</div>
+      </body>
     </html>
   );
 }
