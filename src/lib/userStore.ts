@@ -5,15 +5,13 @@ import { db } from "@/lib/firebase-config";
 interface UserStore {
   currentUser: any;
   isLoading: boolean;
-  fetchUserInfo: (uid:any) => any
+  fetchUserInfo: (uid: any) => any;
 }
-
-
 
 export const useUserStore = create<UserStore>((set) => ({
   currentUser: null,
   isLoading: true,
-  fetchUserInfo: async (uid:any) => {
+  fetchUserInfo: async (uid: any) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
 
     try {

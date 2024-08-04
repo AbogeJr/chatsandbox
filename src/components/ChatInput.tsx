@@ -12,12 +12,19 @@ interface Props {
   onEmojiClick: (e: any) => void;
 }
 
-const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiClick }: Props) => {
+const ChatInput = ({
+  text,
+  setText,
+  handleSend,
+  handleImg,
+  isDisabled,
+  onEmojiClick,
+}: Props) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !isDisabled) {
-      e.preventDefault(); 
+    if (e.key === "Enter" && !isDisabled) {
+      e.preventDefault();
       handleSend();
-      setText(''); 
+      setText("");
     }
   };
 
@@ -27,21 +34,18 @@ const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiCl
         <label htmlFor="file">
           <IoIosAttach className="w-5 h-5 cursor-pointer" size={20} />
         </label>
-        <input
-          type="file"
-          id="file"
-          className="hidden"
-          onChange={handleImg}
-        />
+        <input type="file" id="file" className="hidden" onChange={handleImg} />
         <FaCameraRetro className="cursor-pointer" size={20} />
         <FaMicrophoneAlt className="cursor-pointer" size={20} />
       </div>
       <input
         type="text"
-        placeholder={isDisabled ? "You cannot send a message" : "Type a message..."}
+        placeholder={
+          isDisabled ? "You cannot send a message" : "Type a message..."
+        }
         value={text}
         onChange={(e) => setText(e.target.value)}
-        onKeyDown={handleKeyDown} 
+        onKeyDown={handleKeyDown}
         disabled={isDisabled}
         className="flex-1 w-2/5 bg-gray-800 border-none outline-none text-white p-4 px-6 rounded-full text-sm  disabled:cursor-not-allowed"
       />

@@ -5,21 +5,27 @@ import Image from "next/image";
 import { BsEmojiSmile } from "react-icons/bs";
 
 interface Props {
-    onEmojiClick: (e: any) => void;
-};
+  onEmojiClick: (e: any) => void;
+}
 
-const EmojiPickerComponent = ({ onEmojiClick } : Props ) => {
+const EmojiPickerComponent = ({ onEmojiClick }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
     <div className="relative">
-      <BsEmojiSmile size={20} className="cursor-pointer" onClick={() => setOpen((prev) => !prev)} />
+      <BsEmojiSmile
+        size={20}
+        className="cursor-pointer"
+        onClick={() => setOpen((prev) => !prev)}
+      />
       {open && (
         <div className="absolute bottom-12 left-0">
-          <EmojiPicker  onEmojiClick={(e) => {
-            onEmojiClick(e);
-            setOpen(false);
-          }} />
+          <EmojiPicker
+            onEmojiClick={(e) => {
+              onEmojiClick(e);
+              setOpen(false);
+            }}
+          />
         </div>
       )}
     </div>

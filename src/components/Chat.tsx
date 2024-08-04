@@ -1,7 +1,14 @@
 // Chat.tsx
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { arrayUnion, doc, DocumentData, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  arrayUnion,
+  doc,
+  DocumentData,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase-config";
 import { useChatStore } from "@/lib/chatStore";
 import { useUserStore } from "@/lib/userStore";
@@ -11,25 +18,25 @@ import ChatMessages from "./ChatMessages";
 import ImagePreview from "./ImagePreview";
 import ChatInput from "./ChatInput";
 
-
 export interface ImageState {
-    file: File | null;
-    url: string | null;
-  }
+  file: File | null;
+  url: string | null;
+}
 
 const Chat = () => {
   const [chat, setChat] = useState<DocumentData>();
   const [text, setText] = useState("");
   const [img, setImg] = useState<ImageState>({ file: null, url: "" });
   const { currentUser } = useUserStore();
-  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } = useChatStore();
+  const { chatId, user, isCurrentUserBlocked, isReceiverBlocked } =
+    useChatStore();
   const endRef = useRef<HTMLDivElement | null>(null);
 
-useEffect(() => {
-  if (endRef.current) {
-    endRef.current.scrollIntoView({ behavior: "smooth" });
-  }
-}, [chat?.messages]);
+  useEffect(() => {
+    if (endRef.current) {
+      endRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chat?.messages]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -45,10 +52,10 @@ useEffect(() => {
     };
   }, [chatId]);
 
-  interface EmojiEvent  {
+  interface EmojiEvent {
     emoji: string;
-  };
-  
+  }
+
   const handleEmoji = (e: EmojiEvent) => setText((prev) => prev + e.emoji);
 
   const handleImg = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,9 +68,9 @@ useEffect(() => {
   };
 
   const handleTranslate = async (text: string, targetLang: string) => {
-    const response = await fetch('/api/route', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/route", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, target_lang: targetLang }),
     });
     const res = await response.json();
@@ -84,7 +91,10 @@ useEffect(() => {
           senderId: currentUser.id,
           currentLanguage: currentUser.preferredLanguage || "en-GB",
           content: [
-            { [currentUser.preferredLanguage]: text, [user.preferredLanguage]: translation },
+            {
+              [currentUser.preferredLanguage]: text,
+              [user.preferredLanguage]: translation,
+            },
           ],
           createdAt: new Date(),
           ...(imgUrl ? { img: imgUrl } : {}),
@@ -97,8 +107,11 @@ useEffect(() => {
         const userChatsSnapshot = await getDoc(userChatsRef);
         if (userChatsSnapshot.exists()) {
           const userChatsData = userChatsSnapshot.data();
-          const chatIndex = userChatsData.chats.findIndex((c : DocumentData) => c.chatId === chatId);
-          userChatsData.chats[chatIndex].lastMessage = id == currentUser.id ? text : translation;
+          const chatIndex = userChatsData.chats.findIndex(
+            (c: DocumentData) => c.chatId === chatId
+          );
+          userChatsData.chats[chatIndex].lastMessage =
+            id == currentUser.id ? text : translation;
           userChatsData.chats[chatIndex].isSeen = id === currentUser.id;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
           await updateDoc(userChatsRef, { chats: userChatsData.chats });

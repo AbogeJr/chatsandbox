@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: "chateasy-5655d.appspot.com",
   messagingSenderId: "273622710982",
   appId: "1:273622710982:web:c3b83e77931572f11db5c7",
-  measurementId: "G-HEVQZGXP5R"
+  measurementId: "G-HEVQZGXP5R",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -18,4 +18,3 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
-export const provider = new GoogleAuthProvider()

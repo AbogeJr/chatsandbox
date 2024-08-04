@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { DocumentData } from 'firebase/firestore';
+import Image from "next/image";
+import { DocumentData } from "firebase/firestore";
 
 interface ChatItemProps {
   chat: DocumentData;
@@ -7,7 +7,11 @@ interface ChatItemProps {
   handleSelect: (chat: DocumentData) => void;
 }
 
-const ChatItem: React.FC<ChatItemProps> = ({ chat, currentUser, handleSelect }) => {
+const ChatItem: React.FC<ChatItemProps> = ({
+  chat,
+  currentUser,
+  handleSelect,
+}) => {
   return (
     <div
       className="flex items-center gap-[20px] p-[20px] cursor-pointer border-b-[1px] border-b-[#dddddd35]"
@@ -22,16 +26,20 @@ const ChatItem: React.FC<ChatItemProps> = ({ chat, currentUser, handleSelect }) 
         className="w-[50px] h-[50px] rounded-full object-cover"
         src={
           chat.user.blocked.includes(currentUser.id)
-            ? "/avatar.png"
-            : chat.user.avatar || "avatar.png"
+            ? "/ava.jpg"
+            : chat.user.avatar || "ava.jpg"
         }
         alt=""
       />
       <div className="flex flex-col gap-[10px]">
         <span className="font-[500]">
-          {chat.user.blocked.includes(currentUser.id) ? "User" : chat.user.username}
+          {chat.user.blocked.includes(currentUser.id)
+            ? "User"
+            : chat.user.username}
         </span>
-        <p className="text-[14px] font-[300]">{chat.lastMessage.slice(0, 25)}...</p>
+        <p className="text-[14px] font-[300]">
+          {chat.lastMessage.slice(0, 25)}...
+        </p>
       </div>
     </div>
   );

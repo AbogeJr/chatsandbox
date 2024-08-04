@@ -2,13 +2,15 @@ import { create } from "zustand";
 import { useUserStore } from "./userStore";
 
 interface Store {
-  chatId: any,
-  user: any,
-  isCurrentUserBlocked: boolean,
-  isReceiverBlocked: boolean,
-  changeChat: (chatId:any, user:any) => any,
-  changeBlock: () => any,
-  resetChat: () => any,
+  chatId: any;
+  user: any;
+  isCurrentUserBlocked: boolean;
+  isReceiverBlocked: boolean;
+  showDetails: boolean;
+  changeChat: (chatId: any, user: any) => any;
+  changeBlock: () => any;
+  resetChat: () => any;
+  toggleDetails: () => any;
 }
 
 export const useChatStore = create<Store>((set) => ({
@@ -16,7 +18,8 @@ export const useChatStore = create<Store>((set) => ({
   user: null,
   isCurrentUserBlocked: false,
   isReceiverBlocked: false,
-  changeChat: (chatId:any, user:any) => {
+  showDetails: false,
+  changeChat: (chatId: any, user: any) => {
     const currentUser = useUserStore.getState().currentUser;
 
     // CHECK IF CURRENT USER IS BLOCKED
@@ -48,7 +51,10 @@ export const useChatStore = create<Store>((set) => ({
   },
 
   changeBlock: () => {
-    set((state:any) => ({ ...state, isReceiverBlocked: !state.isReceiverBlocked }));
+    set((state: any) => ({
+      ...state,
+      isReceiverBlocked: !state.isReceiverBlocked,
+    }));
   },
   resetChat: () => {
     set({
@@ -57,5 +63,9 @@ export const useChatStore = create<Store>((set) => ({
       isCurrentUserBlocked: false,
       isReceiverBlocked: false,
     });
+  },
+
+  toggleDetails: () => {
+    set((state: any) => ({ ...state, showDetails: !state.showDetails }));
   },
 }));

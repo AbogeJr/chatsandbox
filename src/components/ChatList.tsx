@@ -3,7 +3,13 @@
 import { useEffect, useState } from "react";
 import AddUser from "./AddUser";
 import { useUserStore } from "@/lib/userStore";
-import { doc, DocumentData, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  DocumentData,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase-config";
 import { useChatStore } from "@/lib/chatStore";
 import SearchBar from "./SearchBar";
@@ -33,7 +39,7 @@ const ChatList: React.FC = () => {
         });
 
         const chatData = await Promise.all(promises);
-        
+
         setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
       }
     );
@@ -77,9 +83,19 @@ const ChatList: React.FC = () => {
 
   return (
     <div className="flex-[1]  overflow-scroll">
-      <SearchBar input={input} setInput={setInput} addMode={addMode} toggleAddMode={toggleAddMode} />
+      <SearchBar
+        input={input}
+        setInput={setInput}
+        addMode={addMode}
+        toggleAddMode={toggleAddMode}
+      />
       {filteredChats.map((chat) => (
-        <ChatItem key={chat.chatId} chat={chat} currentUser={currentUser} handleSelect={handleSelect} />
+        <ChatItem
+          key={chat.chatId}
+          chat={chat}
+          currentUser={currentUser}
+          handleSelect={handleSelect}
+        />
       ))}
 
       {addMode && <AddUser />}
