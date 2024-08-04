@@ -27,7 +27,7 @@ const App = () => {
   if (isLoading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="container">
+    <div className="w-[1200px] h-[90vh] mt-[30px] bg-[rgba(0,0,0,0.9)] backdrop-blur-[19px] backdrop-saturate-[180%] rounded-[12px] border border-[rgba(255,255,255,0.125)] flex">
       {currentUser ? (
         <>
           <List />

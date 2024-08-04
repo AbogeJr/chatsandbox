@@ -98,7 +98,7 @@ useEffect(() => {
         if (userChatsSnapshot.exists()) {
           const userChatsData = userChatsSnapshot.data();
           const chatIndex = userChatsData.chats.findIndex((c : DocumentData) => c.chatId === chatId);
-          userChatsData.chats[chatIndex].lastMessage = text;
+          userChatsData.chats[chatIndex].lastMessage = id == currentUser.id ? text : translation;
           userChatsData.chats[chatIndex].isSeen = id === currentUser.id;
           userChatsData.chats[chatIndex].updatedAt = Date.now();
           await updateDoc(userChatsRef, { chats: userChatsData.chats });

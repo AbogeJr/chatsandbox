@@ -7,20 +7,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  /* font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif; */
 }
 
-body {
+/* body {
   background-image: url("/bg2.jpg");
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
   color: white;
-}
+} */
 
-.container {
+/* .container {
   width: 1200px;
   height: 90vh;
   margin-top: 30px;
@@ -29,7 +29,7 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   display: flex;
-}
+} */
 
 .loading{
   padding: 50px;
@@ -419,6 +419,7 @@ body {
 
     input {
       flex: 1;
+      width: 40%;
       background-color: rgba(17, 25, 40, 0.5);
       border: none;
       outline: none;
@@ -682,6 +683,7 @@ input {
 
 .chatList {
   flex: 1;
+  max-width: 300px;
   overflow: scroll;
   .search {
     display: flex;
