@@ -5,6 +5,7 @@ import { useUserStore } from "@/lib/userStore";
 import Image from "next/image";
 import { User } from "./ChatHeader";
 
+
 const UserAvatar = ({ user } : User ) => (
   <div className="user">
     <Image width={400} height={400} src={user?.avatar || "/avatar.png"} alt="" />
@@ -29,7 +30,6 @@ const MediaGallery = () => (
       <Image width={30} height={30} src="/arrowUp.png" alt="" />
     </div>
     <div className="photos">
-      <MediaItem src="/alo.jpg" filename="photo_2024_2.png" />
       <MediaItem src="/alo.jpg" filename="photo_2024_2.png" />
     </div>
   </div>
@@ -81,7 +81,9 @@ const BlockButton = ({ isReceiverBlocked, isCurrentUserBlocked, userId, changeBl
         ? "You are Blocked!"
         : isReceiverBlocked
         ? "User blocked"
-        : "Block User"}
+        : "Block User" }
+
+
     </button>
   );
 };

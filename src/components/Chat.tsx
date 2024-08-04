@@ -113,7 +113,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="chat">
+    <div className="chat transition-all">
       <ChatHeader user={user} />
       <ChatMessages chat={chat} currentUser={currentUser} endRef={endRef} />
       <ImagePreview img={img} />

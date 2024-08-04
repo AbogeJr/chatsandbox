@@ -1,6 +1,9 @@
 // ChatInput.tsx
 import Image from "next/image";
 import EmojiPickerComponent from "./EmojiPicker";
+import { IoIosAttach, IoIosSend } from "react-icons/io";
+import { FaCameraRetro,FaMicrophoneAlt } from "react-icons/fa";
+
 
 type Props = {
     text: string;
@@ -16,7 +19,9 @@ const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiCl
   <div className="bottom">
     <div className="icons">
       <label htmlFor="file">
-        <Image width={50} height={50} src="/img.png" alt="" />
+      <IoIosAttach className="cursor-pointer" size={20}/>
+
+
       </label>
       <input
         type="file"
@@ -24,8 +29,8 @@ const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiCl
         style={{ display: "none" }}
         onChange={handleImg}
       />
-      <Image width={20} height={20} src="/camera.png" alt="" />
-      <Image width={20} height={20} src="/mic.png" alt="" />
+      <FaCameraRetro className="cursor-pointer" size={20} />
+      <FaMicrophoneAlt className="cursor-pointer" size={20} />
     </div>
     <input
       type="text"
@@ -40,7 +45,7 @@ const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiCl
       onClick={handleSend}
       disabled={isDisabled}
     >
-      Send
+      <IoIosSend size={20}/>
     </button>
   </div>
 );

@@ -77,18 +77,18 @@ const AddUser = () => {
   };
 
   return (
-    <div className="addUser">
-      <form onSubmit={handleSearch}>
-        <input type="text" placeholder="Username" name="username" />
-        <button>Search</button>
+    <div className="w-max h-max p-[30px] bg-[rgba(17,25,40,0.781)] rounded-[10px] absolute top-0 bottom-0 left-0 right-0 m-auto">
+      <form className="flex gap-[20px]" onSubmit={handleSearch}>
+        <input className="p-[20px] rounded-[10px] border-none outline-none" type="text" placeholder="Username" name="username" />
+        <button className="p-[20px] rounded-[10px] bg-[#1a73e8] text-white border-none cursor-pointer">Search</button>
       </form>
       {user && (
-        <div className="user">
-          <div className="detail">
-            <Image  width={100} height={100} src={user.avatar || "/avatar.png"} alt="" />
+        <div className="mt-[50px] flex items-center justify-between">
+          <div className="flex items-center gap-[20px]">
+            <Image className="w-[50px] h-[50px] rounded-full object-cover"  width={100} height={100} src={user.avatar || "/avatar.png"} alt="" />
             <span>{user.username}</span>
           </div>
-          <button onClick={handleAdd}>Add User</button>
+          <button className="p-[10px] rounded-[10px] bg-[#1a73e8] text-white border-none cursor-pointer" onClick={handleAdd}>Add User</button>
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
-// ChatHeader.tsx
-import Image from "next/image";
 import UserAvatar from "./Avatar";
+import { FaPhone, FaVideo } from "react-icons/fa";
+import { SlOptionsVertical } from "react-icons/sl";
+
 
 export type User = {
     user: {
@@ -10,12 +11,12 @@ export type User = {
 };
 
 const ChatHeader = ({ user }: User) => (
-  <div className="top">
+  <div className="p-[20px] flex items-center border-b  justify-between">
     <UserAvatar user={user} />
-    <div className="icons">
-      <Image width={20} height={20} src="/phone.png" alt="" />
-      <Image width={20} height={20} src="/video.png" alt="" />
-      <Image width={20} height={20} src="/info.png" alt="" />
+    <div className="flex gap-[20px]">
+      <FaPhone size={20}/>
+      <FaVideo size={20}/>
+      <SlOptionsVertical size={20}/>
     </div>
   </div>
 );

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import AddUser from "./AddUser";
@@ -6,15 +6,16 @@ import { useUserStore } from "@/lib/userStore";
 import { doc, DocumentData, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase-config";
 import { useChatStore } from "@/lib/chatStore";
-import Image from "next/image";
+import SearchBar from "./SearchBar";
+import ChatItem from "./ChatListItem";
 
-const ChatList = () => {
+const ChatList: React.FC = () => {
   const [chats, setChats] = useState<DocumentData[]>([]);
   const [addMode, setAddMode] = useState(false);
   const [input, setInput] = useState("");
 
   const { currentUser } = useUserStore();
-  const { chatId, changeChat } = useChatStore();
+  const { changeChat } = useChatStore();
 
   useEffect(() => {
     const unSub = onSnapshot(
@@ -66,54 +67,19 @@ const ChatList = () => {
     }
   };
 
+  const toggleAddMode = () => {
+    setAddMode((prev) => !prev);
+  };
+
   const filteredChats = chats.filter((c) =>
     c.user.username.toLowerCase().includes(input.toLowerCase())
   );
 
   return (
-    <div className="chatList">
-      <div className="search">
-        <div className="searchBar">
-          <Image  width={50} height={50} src="/search.png" alt="" />
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={(e) => setInput(e.target.value)}
-          />
-        </div>
-        <Image  width={20} height={20}
-          src={addMode ? "/minus.png" : "/plus.png"}
-          alt=""
-          className="add"
-          onClick={() => setAddMode((prev) => !prev)}
-        />
-      </div>
+    <div className="flex-[1]  overflow-scroll">
+      <SearchBar input={input} setInput={setInput} addMode={addMode} toggleAddMode={toggleAddMode} />
       {filteredChats.map((chat) => (
-        <div
-          className="item"
-          key={chat.chatId}
-          onClick={() => handleSelect(chat)}
-          style={{
-            backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
-          }}
-        >
-          <Image  width={50} height={50}
-            src={
-              chat.user.blocked.includes(currentUser.id)
-                ? "/avatar.png"
-                : chat.user.avatar || "avatar.png"
-            }
-            alt=""
-          />
-          <div className="texts">
-            <span>
-              {chat.user.blocked.includes(currentUser.id)
-                ? "User"
-                : chat.user.username}
-            </span>
-            <p>{chat.lastMessage.slice(0,25)}...</p>
-          </div>
-        </div>
+        <ChatItem key={chat.chatId} chat={chat} currentUser={currentUser} handleSelect={handleSelect} />
       ))}
 
       {addMode && <AddUser />}
