@@ -17,7 +17,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
       className="flex items-center gap-[20px] p-[20px] cursor-pointer border-b-[1px] border-b-[#dddddd35]"
       onClick={() => handleSelect(chat)}
       style={{
-        backgroundColor: chat?.isSeen ? "transparent" : "#5183fe",
+        backgroundColor: chat.isSeen ? "transparent" : "#5183fe",
       }}
     >
       <Image

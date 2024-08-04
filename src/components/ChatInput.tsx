@@ -30,14 +30,8 @@ const ChatInput = ({
 
   return (
     <div className="p-5 flex items-center justify-between border-t border-[#dddddd35] gap-5 mt-auto">
-      <div className="flex gap-5">
-        <label htmlFor="file">
-          <IoIosAttach className="w-5 h-5 cursor-pointer" size={20} />
-        </label>
-        <input type="file" id="file" className="hidden" onChange={handleImg} />
-        <FaCameraRetro className="cursor-pointer" size={20} />
-        <FaMicrophoneAlt className="cursor-pointer" size={20} />
-      </div>
+      <EmojiPickerComponent onEmojiClick={onEmojiClick} />
+
       <input
         type="text"
         placeholder={
@@ -47,9 +41,17 @@ const ChatInput = ({
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleKeyDown}
         disabled={isDisabled}
-        className="flex-1 w-2/5 bg-gray-800 border-none outline-none text-white p-4 px-6 rounded-full text-sm  disabled:cursor-not-allowed"
+        className="flex-1 w-2/5 bg-black border border-[#dddddd35] outline-none text-white p-4 px-6 rounded-full text-sm  disabled:cursor-not-allowed"
       />
-      <EmojiPickerComponent onEmojiClick={onEmojiClick} />
+      <div className="flex gap-5">
+        <label htmlFor="file">
+          <IoIosAttach className="w-5 h-5 cursor-pointer" size={20} />
+        </label>
+        <input type="file" id="file" className="hidden" onChange={handleImg} />
+        <FaCameraRetro className="cursor-pointer" size={20} />
+        <FaMicrophoneAlt className="cursor-pointer" size={20} />
+      </div>
+
       <button
         className="bg-blue-500 text-white p-4 border-none rounded-full cursor-pointer disabled:bg-blue-400 disabled:cursor-not-allowed"
         onClick={handleSend}

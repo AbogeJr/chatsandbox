@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { IoMdExit } from "react-icons/io";
 import { MdBlock } from "react-icons/md";
+import { BsTrash } from "react-icons/bs";
 
 interface AvatarProps {
   user: {
@@ -16,33 +17,53 @@ interface AvatarProps {
 }
 
 const UserAvatar = ({ user }: AvatarProps) => (
-  <div className="p-8 py-5 flex flex-col items-center gap-4 border-b border-[#dddddd35]">
+  <div className="p-8 py-5 flex flex-col items-center gap-2 border-b border-[#dddddd35]">
     <Image
-      className="w-24 h-24 rounded-full object-cover"
-      width={400}
-      height={400}
+      className="w-16 h-16 rounded-full object-cover"
+      width={300}
+      height={300}
       src={user?.avatar || "/ava.jpg"}
       alt=""
     />
-    <h2>{user?.username}</h2>
-    <p>Lorem ipsum dolor sit amet.</p>
+    <h2 className="text-xl">{user?.username}</h2>
+    <p className="text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
   </div>
 );
 
-const ChatSettings = () => (
-  <div className="flex items-center justify-between ">
-    <div className="flex w-full  items-center justify-between">
-      <span>Chat Settings</span>
-      <Image
-        className="bg-gray-800 p-2.5 rounded-full cursor-pointer"
-        width={30}
-        height={30}
-        src="/arrowDown.png"
-        alt=""
-      />
+const ChatSettings = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <div className="flex flex-col ">
+      <div className="w-full flex  items-center justify-between">
+        <span>Chat Settings</span>
+        <Image
+          className="bg-gray-800 p-2.5 rounded-full cursor-pointer"
+          width={30}
+          height={30}
+          src={isOpen ? "/arrowUp.png" : "/arrowDown.png"}
+          alt=""
+          onClick={toggleAccordion}
+        />
+      </div>
+      {isOpen && (
+        <div className="overflow-auto max-h-[180px]">
+          <div className="flex flex-col gap-5 mt-5">
+            <div className="flex flex-col items-center justify-between">
+              <button className="w-full text-sm rounded-full p-2 bg-red-500 space-x-2 items-center justify-center flex">
+                <BsTrash size={20} />
+                <span>Delete Chat</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-);
+  );
+};
 
 const MediaGallery = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,8 +73,8 @@ const MediaGallery = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <div className="w-full flex items-center justify-between">
+    <div className="flex flex-col ">
+      <div className="w-full flex  items-center justify-between">
         <span>Media</span>
         <Image
           className="bg-gray-800 p-2.5 rounded-full cursor-pointer"
@@ -65,8 +86,10 @@ const MediaGallery = () => {
         />
       </div>
       {isOpen && (
-        <div className="flex flex-col gap-5 mt-5">
-          <MediaItem src="/alo.jpg" filename="photo_2024_2.png" />
+        <div className="overflow-auto max-h-[180px]">
+          <div className="flex flex-col gap-5 mt-5">
+            <MediaItem src="/ava.jpg" filename="image.jpg" />
+          </div>
         </div>
       )}
     </div>
@@ -133,7 +156,7 @@ const BlockButton = ({
   return (
     <button
       onClick={handleBlock}
-      className="p-2.5 bg-[orangered] text-white border-none  cursor-pointer hover:bg-red-500 rounded-full flex items-center justify-center space-x-2"
+      className="p-2.5 bg-gray-800 text-sm text-white border-none  cursor-pointer hover:bg-red-500 rounded-full flex items-center justify-center space-x-2"
     >
       <MdBlock size={20} />
       <span>
@@ -155,7 +178,7 @@ const LogoutButton = ({ resetChat }: any) => {
 
   return (
     <button
-      className="p-2.5 bg-blue-600 flex items-center justify-center space-x-2 rounded-full"
+      className="p-2.5 text-sm bg-blue-600 flex items-center justify-center space-x-2 rounded-full"
       onClick={handleLogout}
     >
       <IoMdExit size={20} />
@@ -177,16 +200,18 @@ const Detail = () => {
   return (
     <div className="flex-1">
       <UserAvatar user={user} />
-      <div className="p-5 flex flex-col gap-6 overflow-y-auto max-h-84">
+      <div className="p-4 py-0 pt-2 flex flex-col gap-5 overflow-auto border-red-500 h-full max-h-[400px]">
         <ChatSettings />
         <MediaGallery />
-        <BlockButton
-          isReceiverBlocked={isReceiverBlocked}
-          isCurrentUserBlocked={isCurrentUserBlocked}
-          userId={user?.id}
-          changeBlock={changeBlock}
-        />
-        <LogoutButton resetChat={resetChat} />
+        <div className="w-full mt-auto flex flex-col gap-2">
+          <BlockButton
+            isReceiverBlocked={isReceiverBlocked}
+            isCurrentUserBlocked={isCurrentUserBlocked}
+            userId={user?.id}
+            changeBlock={changeBlock}
+          />
+          <LogoutButton resetChat={resetChat} />
+        </div>
       </div>
     </div>
   );

@@ -47,11 +47,6 @@ const Login = () => {
     // VALIDATE INPUTS
     if (!username || !email || !password)
       return toast.warn("Please enter inputs!");
-    if (!avatar.file) {
-      toast.warn("Please upload an avatar!");
-      setLoading(false);
-      return;
-    }
 
     // VALIDATE UNIQUE USERNAME
     const usersRef = collection(db, "users");
