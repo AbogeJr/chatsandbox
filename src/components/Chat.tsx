@@ -89,7 +89,7 @@ const Chat = () => {
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
           senderId: currentUser.id,
-          currentLanguage: currentUser.preferredLanguage || "en-GB",
+          currentLanguage: currentUser.preferredLanguage,
           content: [
             {
               [currentUser.preferredLanguage]: text,

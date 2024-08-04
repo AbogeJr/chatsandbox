@@ -100,7 +100,7 @@ const ChatList: React.FC = () => {
         ))}
       </div>
 
-      {addMode && <AddUser />}
+      {addMode && <AddUser toggleAddMode={toggleAddMode} />}
     </div>
   );
 };

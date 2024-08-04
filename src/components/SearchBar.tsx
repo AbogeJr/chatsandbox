@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { FaSearch } from "react-icons/fa";
+import { BsPlus } from "react-icons/bs";
+import { FaMinus, FaSearch } from "react-icons/fa";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 interface SearchBarProps {
   input: string;
@@ -26,14 +28,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
           onChange={(e) => setInput(e.target.value)}
         />
       </div>
-      <Image
-        width={20}
-        height={20}
-        src={addMode ? "/minus.png" : "/plus.png"}
-        alt="Toggle Add Mode"
-        className="w-[36px] h-[36px] bg-[rgba(17,25,40,0.5)] p-[10px] rounded-[10px] cursor-pointer"
-        onClick={toggleAddMode}
-      />
+      <button onClick={toggleAddMode}>
+        {!addMode ? (
+          <AiOutlinePlus size={20} className="cursor-pointer" />
+        ) : (
+          <AiOutlineMinus size={20} className="cursor-pointer" />
+        )}
+      </button>
     </div>
   );
 };

@@ -17,7 +17,7 @@ import { useState } from "react";
 import { useUserStore } from "@/lib/userStore";
 import Image from "next/image";
 
-const AddUser = () => {
+const AddUser = ({ toggleAddMode }: any) => {
   const [user, setUser] = useState<DocumentData>();
 
   const { currentUser } = useUserStore();
@@ -73,19 +73,24 @@ const AddUser = () => {
       });
     } catch (err) {
       console.log(err);
+    } finally {
+      toggleAddMode();
     }
   };
 
   return (
-    <div className="w-max h-max p-[30px] bg-[rgba(17,25,40,0.781)] rounded-[10px] absolute top-0 bottom-0 left-0 right-0 m-auto">
+    <div className="w-max h-max p-[30px] border border-[#dddddd35] bg-black/95 rounded-[10px] absolute top-0 bottom-0 left-0 right-0 m-auto">
+      <h2 className="mb-5  text-center text-gray-500 text-xl">
+        Search for a User by their Username
+      </h2>
       <form className="flex gap-[20px]" onSubmit={handleSearch}>
         <input
-          className="p-[20px] rounded-[10px] border-none outline-none"
+          className="p-4 rounded-[10px] border-none outline-none"
           type="text"
           placeholder="Username"
           name="username"
         />
-        <button className="p-[20px] rounded-[10px] bg-[#1a73e8] text-white border-none cursor-pointer">
+        <button className="p-4 px-9 rounded-full bg-[orangered] text-white border-none cursor-pointer">
           Search
         </button>
       </form>
@@ -102,10 +107,10 @@ const AddUser = () => {
             <span>{user.username}</span>
           </div>
           <button
-            className="p-[10px] rounded-[10px] bg-[#1a73e8] text-white border-none cursor-pointer"
+            className="p-4 px-6 rounded-full bg-[orangered] text-white border-none cursor-pointer"
             onClick={handleAdd}
           >
-            Add User
+            Start Chat
           </button>
         </div>
       )}
