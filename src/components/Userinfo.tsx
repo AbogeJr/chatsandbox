@@ -8,12 +8,12 @@ const Userinfo = () => {
   const { currentUser } = useUserStore();
 
   return (
-    <div className='userInfo'>
-      <div className="user">
-        <Image  width={150} height={150} src={currentUser.avatar || "/avatar.png"} alt="" />
+    <div className='p-5 flex items-center justify-between'>
+      <div className="flex items-center gap-5">
+        <Image className="w-12 h-12 rounded-full object-cover"  width={150} height={150} src={currentUser.avatar || "/avatar.png"} alt="" />
         <h2>{currentUser.username}</h2>
       </div>
-      <div className="icons">
+      <div className="flex gap-5">
         <IoIosOptions size={20} />
       </div>
     </div>

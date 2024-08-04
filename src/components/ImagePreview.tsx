@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { ImageState } from "./Chat";
 
-type Props = {
+interface Props {
     img: ImageState
 };
 

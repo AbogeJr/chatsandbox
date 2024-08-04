@@ -1,7 +1,7 @@
 // UserAvatar.tsx
 import Image from "next/image";
 
-type Props = {
+interface Props {
     user: {
         username: string;
         avatar: string;

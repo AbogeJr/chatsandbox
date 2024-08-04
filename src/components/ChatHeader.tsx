@@ -3,7 +3,7 @@ import { FaPhone, FaVideo } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
 
 
-export type User = {
+export interface User  {
     user: {
         username: string;
         avatar: string;
@@ -11,7 +11,7 @@ export type User = {
 };
 
 const ChatHeader = ({ user }: User) => (
-  <div className="p-[20px] flex items-center border-b  justify-between">
+  <div className="p-[20px] flex items-center border-b border-[#dddddd35] justify-between">
     <UserAvatar user={user} />
     <div className="flex gap-[20px]">
       <FaPhone size={20}/>

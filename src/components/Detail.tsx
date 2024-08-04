@@ -4,36 +4,54 @@ import { auth, db } from "@/lib/firebase-config";
 import { useUserStore } from "@/lib/userStore";
 import Image from "next/image";
 import { User } from "./ChatHeader";
+import { useState } from "react";
 
 
 const UserAvatar = ({ user } : User ) => (
-  <div className="user">
-    <Image width={400} height={400} src={user?.avatar || "/avatar.png"} alt="" />
+  <div className="p-8 py-5 flex flex-col items-center gap-4 border-b border-[#dddddd35]">
+    <Image className="w-24 h-24 rounded-full object-cover" width={400} height={400} src={user?.avatar || "/avatar.png"} alt="" />
     <h2>{user?.username}</h2>
     <p>Lorem ipsum dolor sit amet.</p>
   </div>
 );
 
 const ChatSettings = () => (
-  <div className="option">
-    <div className="title">
+  <div className="flex items-center justify-between ">
+    <div className="flex w-full  items-center justify-between">
       <span>Chat Settings</span>
-      <Image width={20} height={20} src="/arrowDown.png" alt="" />
+      <Image className="bg-gray-800 p-2.5 rounded-full cursor-pointer" width={30} height={30} src="/arrowDown.png" alt="" />
     </div>
   </div>
 );
 
-const MediaGallery = () => (
-  <div className="option">
-    <div className="title">
-      <span>Media</span>
-      <Image width={30} height={30} src="/arrowUp.png" alt="" />
+const MediaGallery = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleAccordion = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="flex flex-col">
+      <div className="w-full flex items-center justify-between">
+        <span>Media</span>
+        <Image
+          className="bg-gray-800 p-2.5 rounded-full cursor-pointer"
+          width={30}
+          height={30}
+          src={isOpen ? "/arrowUp.png" : "/arrowDown.png"}
+          alt=""
+          onClick={toggleAccordion}
+        />
+      </div>
+      {isOpen && (
+        <div className="flex flex-col gap-5 mt-5">
+          <MediaItem src="/alo.jpg" filename="photo_2024_2.png" />
+        </div>
+      )}
     </div>
-    <div className="photos">
-      <MediaItem src="/alo.jpg" filename="photo_2024_2.png" />
-    </div>
-  </div>
-);
+  );
+};
 
 interface MediaItemProps {
   src: string;
@@ -41,12 +59,12 @@ interface MediaItemProps {
 }
 
 const MediaItem = ({ src, filename } : MediaItemProps) => (
-  <div className="photoItem">
-    <div className="photoDetail">
-      <Image width={100} height={100} src={src} alt={filename} />
-      <span>{filename}</span>
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-5">
+      <Image className="w-10 h-10 rounded object-cover" width={100} height={100} src={src} alt={filename} />
+      <span className="text-sm text-gray-400 font-light">{filename}</span>
     </div>
-    <Image width={30} height={30} src="/download.png" alt="Download" className="icon" />
+    <Image width={30} height={30} src="/download.png" alt="Download" className="w-7 h-7 bg-gray-800 p-2.5 rounded-full cursor-pointer" />
   </div>
 );
 
@@ -76,14 +94,12 @@ const BlockButton = ({ isReceiverBlocked, isCurrentUserBlocked, userId, changeBl
   };
 
   return (
-    <button onClick={handleBlock}>
+    <button onClick={handleBlock} className="p-2.5 bg-red-400 text-white border-none  cursor-pointer hover:bg-red-500">
       {isCurrentUserBlocked
         ? "You are Blocked!"
         : isReceiverBlocked
         ? "User blocked"
         : "Block User" }
-
-
     </button>
   );
 };
@@ -97,7 +113,7 @@ const LogoutButton = ({ resetChat } : any) => {
   };
 
   return (
-    <button className="logout" onClick={handleLogout}>
+    <button className="p-2.5 bg-blue-600" onClick={handleLogout}>
       Logout
     </button>
   );
@@ -108,9 +124,9 @@ const Detail = () => {
     useChatStore();
 
   return (
-    <div className="detail">
+    <div className="flex-1">
       <UserAvatar user={user} />
-      <div className="info">
+      <div className="p-5 flex flex-col gap-6 overflow-y-auto max-h-84">
         <ChatSettings />
         <MediaGallery />
         <BlockButton

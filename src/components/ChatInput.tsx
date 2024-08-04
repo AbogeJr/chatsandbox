@@ -5,7 +5,7 @@ import { IoIosAttach, IoIosSend } from "react-icons/io";
 import { FaCameraRetro,FaMicrophoneAlt } from "react-icons/fa";
 
 
-type Props = {
+interface Props  {
     text: string;
     setText: (text: string) => void;
     handleSend: () => void;
@@ -16,17 +16,15 @@ type Props = {
 
 
 const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiClick } : Props) => (
-  <div className="bottom">
-    <div className="icons">
+  <div className="p-5 flex items-center justify-between border-t border-[#dddddd35] gap-5 mt-auto">
+    <div className="flex gap-5">
       <label htmlFor="file">
-      <IoIosAttach className="cursor-pointer" size={20}/>
-
-
+      <IoIosAttach className="w-5 h-5 cursor-pointer" size={20}/>
       </label>
       <input
         type="file"
         id="file"
-        style={{ display: "none" }}
+        className="hidden"
         onChange={handleImg}
       />
       <FaCameraRetro className="cursor-pointer" size={20} />
@@ -38,10 +36,11 @@ const ChatInput = ({ text, setText, handleSend, handleImg, isDisabled, onEmojiCl
       value={text}
       onChange={(e) => setText(e.target.value)}
       disabled={isDisabled}
+      className="flex-1 w-2/5 bg-gray-800 border-none outline-none text-white p-5 rounded-lg text-base disabled:cursor-not-allowed"
     />
     <EmojiPickerComponent onEmojiClick={onEmojiClick} />
     <button
-      className="sendButton"
+      className="bg-blue-500 text-white py-2 px-5 border-none rounded cursor-pointer disabled:bg-blue-400 disabled:cursor-not-allowed"
       onClick={handleSend}
       disabled={isDisabled}
     >

@@ -45,7 +45,7 @@ useEffect(() => {
     };
   }, [chatId]);
 
-  type EmojiEvent = {
+  interface EmojiEvent  {
     emoji: string;
   };
   
@@ -113,7 +113,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="chat transition-all">
+    <div className="flex-[2] border-l-[1px] border-r-[1px]  border-[#dddddd35] h-full flex flex-col">
       <ChatHeader user={user} />
       <ChatMessages chat={chat} currentUser={currentUser} endRef={endRef} />
       <ImagePreview img={img} />

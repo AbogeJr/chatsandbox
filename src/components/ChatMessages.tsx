@@ -3,7 +3,7 @@ import { DocumentData } from "firebase/firestore";
 import Image from "next/image";
 import { format } from "timeago.js";
 
-type Message = {
+interface Message {
     senderId: string;
     img: string;
     content: string;
@@ -12,7 +12,7 @@ type Message = {
     };
 };
 
-type Props = {
+interface Props {
     chat:DocumentData | undefined
     currentUser: any;
     endRef: any;

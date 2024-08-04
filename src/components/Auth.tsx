@@ -108,39 +108,39 @@ const Login = () => {
 
   return (
     
-    <div className="login relative">
-      <div className="item">
+    <div className="w-full h-full flex items-center gap-24 relative">
+      <div className="flex-1 flex flex-col items-center gap-5">
         <h2>Welcome back,</h2>
-        <form onSubmit={handleLogin}>
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
-          <button disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
+        <form className="flex flex-col items-center justify-center gap-5" onSubmit={handleLogin}>
+          <input className="p-5 border-none outline-none bg-gray-800 text-white rounded" type="text" placeholder="Email" name="email" />
+          <input className="p-5 border-none outline-none bg-gray-800 text-white rounded" type="password" placeholder="Password" name="password" />
+          <button className="w-full p-5 border-none bg-blue-500 text-white rounded cursor-pointer font-medium disabled:cursor-not-allowed disabled:bg-blue-400" disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
           {/* <button onClick={signInGoogle} >Sign In With Google</button> */}
         </form>
       </div>
-      <div className="separator"></div>
-      <div className="item">
+      <div className="h-4/5 w-0.5 bg-gray-300"></div>
+      <div className="flex-1 flex flex-col items-center gap-5">
         <h2>Create an Account</h2>
-        <form onSubmit={handleRegister}>
-          <label htmlFor="file">
-            <Image src={avatar.url || "/avatar.png"} alt="" width={100} height={100} />
+        <form className="flex flex-col items-center justify-center gap-5" onSubmit={handleRegister}>
+          <label className="w-full flex items-center justify-between cursor-pointer underline" htmlFor="file">
+            <Image className="w-12 h-12 rounded object-cover opacity-60" src={avatar.url || "/avatar.png"} alt="" width={100} height={100} />
             Upload an image
           </label>
           <input
             type="file"
             id="file"
-            style={{ display: "none" }}
+            className="hidden"
             onChange={handleAvatar}
           />
-          <input type="text" placeholder="Username" name="username" />
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input className="p-5 border-none outline-none bg-gray-800 text-white rounded" type="text" placeholder="Username" name="username" />
+          <input className="p-5 border-none outline-none bg-gray-800 text-white rounded" type="text" placeholder="Email" name="email" />
+          <input className="p-5 border-none outline-none bg-gray-800 text-white rounded" type="password" placeholder="Password" name="password" />
           <select className="w-full p-6 text-black" name="preferredLanguage">
             <option value="en-GB">English</option>
             <option value="es">Spanish</option>
             <option value="fr">French</option>
           </select>
-          <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
+          <button className="w-full p-5 border-none bg-blue-500 text-white rounded cursor-pointer font-medium disabled:cursor-not-allowed disabled:bg-blue-400" disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>
     </div>

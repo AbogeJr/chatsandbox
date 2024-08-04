@@ -4,7 +4,7 @@ import EmojiPicker from "emoji-picker-react";
 import Image from "next/image";
 import { BsEmojiSmile } from "react-icons/bs";
 
-type Props = {
+interface Props {
     onEmojiClick: (e: any) => void;
 };
 
