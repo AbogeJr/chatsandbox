@@ -24,7 +24,14 @@ const App = () => {
     };
   }, [fetchUserInfo]);
 
-  if (isLoading) return <div className="loading">Loading...</div>;
+  if (isLoading) return (
+    <div className="h-screen flex items-center justify-center">
+      <div
+      className="inline-block  h-40 w-40 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] "
+      role="status">
+      </div>
+    </div>
+  );
 
   return (
     <div className="w-[1200px] h-[90vh] mt-[30px] bg-[rgba(0,0,0,0.9)] backdrop-blur-[19px] backdrop-saturate-[180%] rounded-[12px] border border-[rgba(255,255,255,0.125)] flex">
