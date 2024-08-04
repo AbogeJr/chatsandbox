@@ -1,5 +1,4 @@
 import Image from "next/image";
-import "./userInfo.css"
 import { useUserStore } from "@/lib/userStore";
 
 const Userinfo = () => {

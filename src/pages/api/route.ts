@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         const { text, target_lang } = req.body; 
         console.log("BODY", req.body);
-        const authKey = process.env.DEEPL_AUTH_KEY!; 
+        const authKey = process.env.NEXT_PUBLIC_DEEPL_AUTH_KEY!; 
 
         const translator = new deepl.Translator(authKey);
         const result = await translator.translateText(text, null, target_lang)

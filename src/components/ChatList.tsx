@@ -1,8 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import "./chatList.css";
-import AddUser from "./addUser/addUser";
+import AddUser from "./AddUser";
 import { useUserStore } from "@/lib/userStore";
 import { doc, DocumentData, getDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase-config";

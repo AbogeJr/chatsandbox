@@ -1,5 +1,4 @@
 "use client"
-import "./addUser.css";
 import { db } from "@/lib/firebase-config";
 import {
   arrayUnion,

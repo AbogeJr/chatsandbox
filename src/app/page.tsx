@@ -1,10 +1,10 @@
 "use client"
 import { useEffect } from "react";
-import Chat from "@/components/chat/Chat";
-import Detail from "@/components/detail/Detail";
-import List from "@/components/list/List";
+import Chat from "@/components/Chat";
+import Detail from "@/components/Detail";
+import List from "@/components/List";
 import Login from "@/app/auth/page";
-import Notification from "@/components/notification/Notification";
+import Notification from "@/components/Notification";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase-config";
 import { useUserStore } from "@/lib/userStore";

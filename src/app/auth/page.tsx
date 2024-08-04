@@ -101,14 +101,15 @@ const Login = () => {
 }
 
   return (
-    <>
-    <div className="login">
+    
+    <div className="login relative">
       <div className="item">
         <h2>Welcome back,</h2>
         <form onSubmit={handleLogin}>
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
           <button disabled={loading}>{loading ? "Loading" : "Sign In"}</button>
+          {/* <button onClick={signInGoogle} >Sign In With Google</button> */}
         </form>
       </div>
       <div className="separator"></div>
@@ -129,19 +130,18 @@ const Login = () => {
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
           <select className="w-full p-6 text-black" name="preferredLanguage">
-            <option value="en">English</option>
+            <option value="en-GB">English</option>
             <option value="es">Spanish</option>
             <option value="fr">French</option>
           </select>
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>
-    </div>
-    <div className=''>
-        <h1>SIGN IN WITH GOGGLE TO CONTINUE</h1>
+    {/* <div className='absolute bottom-12 left-12'>
         <button onClick={signInGoogle} className="w-60 py-2 px-10 bg-red-400">Sign In With Google</button>
+    </div> */}
     </div>
-    </>
+    
   );
 };
 
