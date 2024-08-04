@@ -40,7 +40,11 @@ const Login = () => {
     // VALIDATE INPUTS
     if (!username || !email || !password)
       return toast.warn("Please enter inputs!");
-    if (!avatar.file) return toast.warn("Please upload an avatar!");
+    if (!avatar.file) {
+        toast.warn("Please upload an avatar!")
+        setLoading(false);
+        return;
+    };
 
     // VALIDATE UNIQUE USERNAME
     const usersRef = collection(db, "users");
@@ -95,9 +99,11 @@ const Login = () => {
   };
 
   const signInGoogle = async () => {
-    const result = await signInWithPopup(auth, provider)
-    console.log(result)
-    cookies.set('auth-token', result.user.refreshToken)
+    try{
+        await signInWithPopup(auth, provider)
+    } catch (err:any) {
+      console.log(err);
+    }
 }
 
   return (
@@ -137,9 +143,6 @@ const Login = () => {
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>
-    {/* <div className='absolute bottom-12 left-12'>
-        <button onClick={signInGoogle} className="w-60 py-2 px-10 bg-red-400">Sign In With Google</button>
-    </div> */}
     </div>
     
   );
