@@ -47,6 +47,11 @@ const Login = () => {
     // VALIDATE INPUTS
     if (!username || !email || !password)
       return toast.warn("Please enter inputs!");
+    // if (!avatar.file) {
+    //   toast.warn("Please upload an avatar!");
+    //   setLoading(false);
+    //   return;
+    // }
 
     // VALIDATE UNIQUE USERNAME
     const usersRef = collection(db, "users");
@@ -63,13 +68,13 @@ const Login = () => {
         password as string
       );
 
-      const imgUrl = await upload(avatar.file);
+      const imgUrl = avatar.file && (await upload(avatar.file));
 
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
         preferredLanguage,
-        avatar: imgUrl,
+        avatar: imgUrl || "",
         id: res.user.uid,
         blocked: [],
       });

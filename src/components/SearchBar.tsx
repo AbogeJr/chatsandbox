@@ -15,8 +15,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   toggleAddMode,
 }) => {
   return (
-    <div className="flex items-center gap-[20px] p-[20px]">
-      <div className="flex-[1] bg-[rgba(17,25,40,0.5)] flex items-center gap-[20px] rounded-full p-[10px] px-6">
+    <div className="flex border-b border-[#dddddd35] items-center gap-[20px] p-[20px]">
+      <div className="flex-[1] bg-[rgba(17,25,40,0.5)]  flex items-center gap-[20px] rounded-full p-[10px] px-6">
         <FaSearch size={15} />
         <input
           className="bg-transparent w-2/3 border-none outline-none text-white flex-[1]"

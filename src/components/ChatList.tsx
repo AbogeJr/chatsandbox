@@ -27,7 +27,7 @@ const ChatList: React.FC = () => {
     const unSub = onSnapshot(
       doc(db, "userchats", currentUser.id),
       async (res: DocumentData) => {
-        const items = res.data().chats;
+        const items = res.data().chats || [];
 
         const promises = items.map(async (item: any) => {
           const userDocRef = doc(db, "users", item.receiverId);
@@ -82,21 +82,23 @@ const ChatList: React.FC = () => {
   );
 
   return (
-    <div className="flex-[1]  overflow-scroll">
+    <div className="flex-[1]  ">
       <SearchBar
         input={input}
         setInput={setInput}
         addMode={addMode}
         toggleAddMode={toggleAddMode}
       />
-      {filteredChats.map((chat) => (
-        <ChatItem
-          key={chat.chatId}
-          chat={chat}
-          currentUser={currentUser}
-          handleSelect={handleSelect}
-        />
-      ))}
+      <div className="overflow-y-scroll max-h-[405px]">
+        {filteredChats.map((chat) => (
+          <ChatItem
+            key={chat.chatId}
+            chat={chat}
+            currentUser={currentUser}
+            handleSelect={handleSelect}
+          />
+        ))}
+      </div>
 
       {addMode && <AddUser />}
     </div>

@@ -27,7 +27,7 @@ const ChatItem: React.FC<ChatItemProps> = ({
         src={
           chat.user.blocked.includes(currentUser.id)
             ? "/ava.jpg"
-            : chat.user.avatar || "ava.jpg"
+            : chat.user.avatar || "/ava.jpg"
         }
         alt=""
       />
@@ -38,7 +38,8 @@ const ChatItem: React.FC<ChatItemProps> = ({
             : chat.user.username}
         </span>
         <p className="text-[14px] font-[300]">
-          {chat.lastMessage.slice(0, 25)}...
+          {chat.lastMessage.slice(0, 25)}
+          {chat.lastMessage.length > 25 && "..."}
         </p>
       </div>
     </div>
