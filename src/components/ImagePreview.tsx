@@ -8,9 +8,10 @@ interface Props {
 
 const ImagePreview = ({ img } : Props) => (
   img.url && (
-    <div className="message own">
-      <div className="texts">
-        <Image width={20} height={20} src={img.url} alt="" />
+    <div className={`border m-5 rounded-3xl border-gray-800 p-5 bg-black flex gap-[20px] self-center`}>
+      <div className="flex flex-col gap-[5px]">
+        <Image width={200} height={200} src={img.url} alt="image to be uploaded" />
+      <span className="text-xs text-gray-500">Uploading File...</span>
       </div>
     </div>
   )
