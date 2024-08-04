@@ -38,24 +38,24 @@ const Detail = () => {
         <p>Lorem ipsum dolor sit amet.</p>
       </div>
       <div className="info">
-        <div className="option">
+        {/* <div className="option">
           <div className="title">
             <span>Chat Settings</span>
             <Image  width={10} height={10} src="/arrowUp.png" alt="" />
           </div>
-        </div>
+        </div> */}
         {/* <div className="option">
           <div className="title">
             <span>Chat Settings</span>
             <img src="./arrowUp.png" alt="" />
           </div>
         </div> */}
-        <div className="option">
+        {/* <div className="option">
           <div className="title">
             <span>Privacy & help</span>
             <Image  width={10} height={10} src="/arrowUp.png" alt="" />
           </div>
-        </div>
+        </div> */}
         {/* <div className="option">
           <div className="title">
             <span>Shared photos</span>
@@ -104,12 +104,12 @@ const Detail = () => {
             </div>
           </div>
         </div> */}
-        <div className="option">
+        {/* <div className="option">
           <div className="title">
             <span>Shared Files</span>
             <Image  width={10} height={10} src="/arrowUp.png" alt="" />
           </div>
-        </div>
+        </div> */}
         <button onClick={handleBlock}>
           {isCurrentUserBlocked
             ? "You are Blocked!"

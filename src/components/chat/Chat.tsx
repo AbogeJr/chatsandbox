@@ -34,6 +34,7 @@ const Chat = () => {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log("CHAAAATS", chat?.messages);
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chat?.messages]);
 
@@ -61,24 +62,47 @@ const Chat = () => {
     }
   };
 
+
+  const handleTranslate = async (text: string, targetLang:string) => {
+    const response = await fetch('/api/route', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+      },
+        body: JSON.stringify({ text, target_lang: targetLang }),
+    });
+
+    const res = await response.json();
+    console.log("RESPONSE", res);
+    return res.result.text;
+  }
+
   const handleSend = async () => {
+    console.log("SENDING message");
     if (text === "") return;
-
     let imgUrl = null;
+    const translation = await handleTranslate(text, user.preferredLanguage);
 
+  
     try {
       if (img.file) {
         imgUrl = await upload(img.file);
       }
-
+      // TODO: add origin && target language
       await updateDoc(doc(db, "chats", chatId), {
         messages: arrayUnion({
           senderId: currentUser.id,
-          text,
+          currentLanguage: currentUser.preferredLanguage || "en-GB",
+          content: [
+            { [currentUser.preferredLanguage]: text , 
+              [user.preferredLanguage]: translation } 
+            // { [user.preferredLanguage]: translation } 
+          ],
           createdAt: new Date(),
           ...(imgUrl ? { img: imgUrl } : {}),
         }),
       });
+
 
       const userIDs = [currentUser.id, user.id];
 
@@ -119,7 +143,7 @@ const Chat = () => {
     <div className="chat">
       <div className="top">
         <div className="user">
-          <Image width={100} height={100} src={user?.avatar || "./avatar.png"} alt="" />
+          <Image width={100} height={100} src={user?.avatar || "/avatar.png"} alt="" />
           <div className="texts">
             <span>{user?.username}</span>
             <p>Lorem ipsum dolor, sit amet.</p>
@@ -132,7 +156,7 @@ const Chat = () => {
         </div>
       </div>
       <div className="center">
-        {chat?.messages?.map((message:any, index: number) => (
+        {chat ? chat?.messages?.map((message:any, index: number) => (
           <div
             className={
               message.senderId === currentUser?.id ? "message own" : "message"
@@ -141,11 +165,11 @@ const Chat = () => {
           >
             <div className="texts">
               {message.img && <Image width={500} height={500} src={message.img} alt="" />}
-              <p>{message.text}</p>
-              <span>{format(message.createdAt)}</span>
+              <p>{message.content[0][currentUser.preferredLanguage]} </p>
+              <span>{format(message.createdAt.toDate())}</span>
             </div>
           </div>
-        ))}
+        )) : <h2>No chats yet</h2>}
         {img.url && (
           <div className="message own">
             <div className="texts">

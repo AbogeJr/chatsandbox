@@ -35,7 +35,7 @@ const Login = () => {
     setLoading(true);
     const formData = new FormData(e.target);
 
-    const { username, email, password } = Object.fromEntries(formData);
+    const { username, email, password, preferredLanguage } = Object.fromEntries(formData);
 
     // VALIDATE INPUTS
     if (!username || !email || !password)
@@ -58,6 +58,7 @@ const Login = () => {
       await setDoc(doc(db, "users", res.user.uid), {
         username,
         email,
+        preferredLanguage,
         avatar: imgUrl,
         id: res.user.uid,
         blocked: [],
@@ -100,6 +101,7 @@ const Login = () => {
 }
 
   return (
+    <>
     <div className="login">
       <div className="item">
         <h2>Welcome back,</h2>
@@ -126,14 +128,20 @@ const Login = () => {
           <input type="text" placeholder="Username" name="username" />
           <input type="text" placeholder="Email" name="email" />
           <input type="password" placeholder="Password" name="password" />
+          <select className="w-full p-6 text-black" name="preferredLanguage">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+          </select>
           <button disabled={loading}>{loading ? "Loading" : "Sign Up"}</button>
         </form>
       </div>
-      <div className=''>
-      <h1>SIGN IN WITH GOGGLE TO CONTINUE</h1>
-      <button onClick={signInGoogle}>Sign In With Google</button>
     </div>
+    <div className=''>
+        <h1>SIGN IN WITH GOGGLE TO CONTINUE</h1>
+        <button onClick={signInGoogle} className="w-60 py-2 px-10 bg-red-400">Sign In With Google</button>
     </div>
+    </>
   );
 };
 
