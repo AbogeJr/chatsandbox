@@ -5,6 +5,8 @@ import { useUserStore } from "@/lib/userStore";
 import Image from "next/image";
 import { User } from "./ChatHeader";
 import { useState } from "react";
+import { IoMdExit } from "react-icons/io";
+import { MdBlock } from "react-icons/md";
 
 
 const UserAvatar = ({ user } : User ) => (
@@ -94,12 +96,15 @@ const BlockButton = ({ isReceiverBlocked, isCurrentUserBlocked, userId, changeBl
   };
 
   return (
-    <button onClick={handleBlock} className="p-2.5 bg-red-400 text-white border-none  cursor-pointer hover:bg-red-500">
+    <button onClick={handleBlock} className="p-2.5 bg-[orangered] text-white border-none  cursor-pointer hover:bg-red-500 rounded-full flex items-center justify-center space-x-2">
+        <MdBlock size={20} />
+      <span>
       {isCurrentUserBlocked
         ? "You are Blocked!"
         : isReceiverBlocked
         ? "User blocked"
         : "Block User" }
+      </span>
     </button>
   );
 };
@@ -113,8 +118,9 @@ const LogoutButton = ({ resetChat } : any) => {
   };
 
   return (
-    <button className="p-2.5 bg-blue-600" onClick={handleLogout}>
-      Logout
+    <button className="p-2.5 bg-blue-600 flex items-center justify-center space-x-2 rounded-full" onClick={handleLogout}>
+      <IoMdExit size={20}/>
+      <span>Log Out</span> 
     </button>
   );
 };
